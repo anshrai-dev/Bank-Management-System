@@ -13,6 +13,10 @@ public class Bank {
 		this.balance = balance;
 	}
 	
+	public int getAccountNumber() {
+		return accountNumber;
+	}
+	
 	public void deposit(double amount) {
 		if(amount>0) {
 			balance+=amount;
