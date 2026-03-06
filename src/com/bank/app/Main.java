@@ -1,8 +1,9 @@
 package com.bank.app;
 
-
 import java.util.Scanner;
+
 public class Main {
+	static int age;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -11,7 +12,7 @@ public class Main {
         int count =0;
         
         int choice;
-        
+        System.out.print(age);
         do {
         	System.out.println("\\n1. Create Account");
         	System.out.println("2. Deposit");
@@ -51,61 +52,108 @@ public class Main {
             case 2:
                 System.out.println("Enter the Account Number:");
                 int enteredAccountNo = sc.nextInt();
-                for(int i=0;i<count;i++) {
-                	if(accounts[i].getAccountNumber() ==enteredAccountNo) {
-                		System.out.println("Enter deposit amount:");
-                        double dep = sc.nextDouble();
-                        accounts[i].deposit(dep);
-                        break;
-                	}
+                
+                int index = findAccount(accounts , count , enteredAccountNo);
+                
+                if(index!=-1) {
+                
+                	System.out.println("Enter deposit amount:");
+                    double dep = sc.nextDouble();
+                    
+                    accounts[index].deposit(dep);
+                    
+                    break;
+                } else {
+                	
+                	System.out.println("Account Not Found");
                 }
+                
                 break;
 
             case 3:
+            	
             	System.out.println("Enter the Account Number:");
-            	int enteredAccountNo2 = sc.nextInt();
-            	for(int i=0;i<count;i++) {
-            		if(accounts[i].getAccountNumber()==enteredAccountNo2) {
-            			System.out.println("Enter withdrawal amount:");
-                        double wit = sc.nextDouble();
-                        accounts[i].withdraw(wit);
-                        System.out.println("Withdrawl Successful");
-                        break;
-            		}
-            	}
-            	break;
-                
+                int enteredAccountNo2 = sc.nextInt();
+
+                int index2 = findAccount(accounts, count, enteredAccountNo2);
+
+                if(index2 != -1) {
+
+                    System.out.println("Enter withdrawal amount:");
+                    double wit = sc.nextDouble();
+
+                    accounts[index2].withdraw(wit);
+
+                } else {
+
+                    System.out.println("Account not found!");
+
+                }
+
+                break;
 
             case 4:
             	System.out.println("Enter the Account Number:");
-            	int enteredAccountNo3 = sc.nextInt();
-            	for(int i=0;i<count;i++) {
-            		if(accounts[i].getAccountNumber()==enteredAccountNo3) {
-            			accounts[i].displayBalance();		
-            		}
-            	}
+                int enteredAccountNo3 = sc.nextInt();
+
+                int index3 = findAccount(accounts, count, enteredAccountNo3);
+
+                if(index3 != -1) {
+
+                    accounts[index3].displayBalance();
+
+                } else {
+
+                    System.out.println("Account not found!");
+
+                }
+
                 break;
 
             case 5:
-            	System.out.println("Enter the Account Number:");
-            	int enteredAccountNo4 = sc.nextInt();
-            	for(int i=0;i<count;i++) {
-            		if(accounts[i].getAccountNumber()==enteredAccountNo4) {
-            			accounts[i].displayAccountDetails();		
-            		}
-            	}
+
+
+                System.out.println("Enter the Account Number:");
+                int enteredAccountNo4 = sc.nextInt();
+
+                int index4 = findAccount(accounts, count, enteredAccountNo4);
+
+                if(index4 != -1) {
+
+                    accounts[index4].displayAccountDetails();
+
+                } else {
+
+                    System.out.println("Account not found!");
+
+                }
+
                 break;
 
             case 6:
-                System.out.println("Thank you for using the system.");
+                
+            	System.out.println("Thank you for using the system.");
                 break;
 
             default:
-                System.out.println("Invalid choice.");
+                
+            	System.out.println("Invalid choice.");
         }
-       } while(choice!=6);
+       
+        }  while(choice!=6);
         
         sc.close();
 	
+	}
+	
+	public static int findAccount(Bank[] accounts, int count,int accNo) {
+		
+		for(int i=0;i<count;i++) {
+			
+			if(accounts[i].getAccountNumber()==accNo) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }
