@@ -1,49 +1,58 @@
-# Java Banking System (Version 1)
+# Java Banking System (Core Java Project)
 
-This is a **console-based banking system developed using Core Java**.  
-The project demonstrates fundamental Java concepts such as **classes, objects, constructors, encapsulation, arrays of objects, loops, and methods**.
+A **console-based banking application built using Core Java** to practice object-oriented programming concepts and real-world logic building.
 
-This project is being built step-by-step while learning Java, and each improvement will be pushed to GitHub as a new version.
+This project is developed **version by version** to demonstrate progressive improvements in code structure, logic, and software design.
 
 ---
 
-## Version 1 Features
+# Current Version
+
+## Version 2 – Code Refactoring and Improved Structure
+
+The project currently implements a **menu-driven banking system** where users can create accounts and perform transactions.
+
+In Version 2 the code was **refactored to improve maintainability** by introducing a reusable method for searching bank accounts.
+
+Key Improvements:
+- Introduced `findAccount()` method to locate accounts
+- Removed repeated loops from multiple cases
+- Added **Account Not Found** validation
+- Cleaner and more modular code structure
+- Improved readability and maintainability
+
+---
+
+# Project Features
 
 - Create Bank Account
 - Deposit Money
 - Withdraw Money
 - Check Account Balance
 - View Account Details
-- Menu-driven console application
+- Menu-driven console interface
 
 ---
 
-## Technologies Used
+# Java Concepts Used
 
-- Java
-- Eclipse IDE
-- Git
-- GitHub
-
----
-
-## Java Concepts Used
-
-This project applies the following Core Java concepts:
+This project demonstrates the following **Core Java concepts**:
 
 - Classes and Objects
 - Constructors
 - Encapsulation
-- Arrays of Objects
 - Static Variables
 - Methods
+- Arrays of Objects
+- Method Returning Values
 - Loops (for loop)
 - Conditional Statements (if-else, switch)
-- Dynamic Input using Scanner
+- Scanner for dynamic input
+- Code Refactoring
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```
 com.bank.app
@@ -53,60 +62,76 @@ com.bank.app
 ```
 
 ### Bank.java
-Contains:
+Handles:
 - Account holder details
-- Balance
-- Deposit method
-- Withdraw method
+- Deposit operation
+- Withdraw operation
 - Display balance
 - Display account details
 
 ### Main.java
-Contains:
-- Menu-driven program
+Handles:
+- Menu-driven system
 - Account creation
 - Account searching
-- Deposit/withdraw logic
+- Transaction operations
 
 ---
 
-## Example Menu
+# Version History
 
-```
-1. Create Account
-2. Deposit
-3. Withdraw
-4. Check Balance
-5. Account Details
-6. Exit
-```
+### Version 1 – Basic Banking System
+Initial implementation of the banking system.
 
----
-
-## Future Improvements
-
-Upcoming versions will include:
-
-Version 2
-- Code refactoring
-- Account search optimization
-
-Version 3
-- Input validation
-- Prevent duplicate account numbers
-
-Version 4
-- Improved project structure
-- Service layer implementation
-
-Version 5
-- File handling for data persistence
-
-Version 6
-- Replace arrays with ArrayList for scalability
+Features:
+- Account creation
+- Deposit
+- Withdraw
+- Balance check
+- Account details
+- Menu-driven console application
 
 ---
 
-## Author
+### Version 2 – Code Refactoring
+Improved program structure.
 
-Developed by **Ansh Rai** while learning Core Java and practicing GitHub workflow.
+Changes:
+- Created `findAccount()` reusable method
+- Removed duplicate loops
+- Added account validation during operations
+- Cleaner code organization
+
+---
+
+# Future Improvements
+
+### Version 3
+- Account number validation (6 digits)
+- Prevent duplicate accounts
+- Prevent invalid deposits/withdrawals
+- Improved input validation
+
+### Version 4
+- Introduce service layer for better architecture
+
+### Version 5
+- File handling to store account data
+
+### Version 6
+- Replace arrays with `ArrayList` for scalability
+
+---
+
+# Technologies Used
+
+- Java
+- Eclipse IDE
+- Git
+- GitHub
+
+---
+
+# Author
+
+Developed by **Ansh Rai** while learning **Core Java and Git workflow**.
