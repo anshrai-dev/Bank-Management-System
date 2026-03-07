@@ -3,7 +3,6 @@ package com.bank.app;
 import java.util.Scanner;
 
 public class Main {
-	static int age;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -12,7 +11,6 @@ public class Main {
         int count =0;
         
         int choice;
-        System.out.print(age);
         do {
         	System.out.println("\\n1. Create Account");
         	System.out.println("2. Deposit");
@@ -25,44 +23,77 @@ public class Main {
             choice = sc.nextInt();
             sc.nextLine();
             
+            if(!isValidChoice(choice)) {
+                System.out.println("Invalid choice! Please select between 1 and 6.");
+                continue;
+            }
+            
             switch(choice) {
 
+           
             case 1:
-            	if(count<accounts.length) {
-            		System.out.println("Enter the Account Holders Name:");
-            		String name = sc.nextLine();
-            		
-            		System.out.println("Enter Account Number:");
-                    int accNo = sc.nextInt();
+                if(count < accounts.length) {
+
+                    System.out.println("Enter the Account Holder's Name:");
+                    String name = sc.nextLine();
+
+                    String accNo;
+
+                    while(true) {
+
+                        System.out.println("Enter 10-digit Account Number:");
+                        accNo = sc.nextLine();
+
+                        if(!isValidAccountNumber(accNo)) {
+                            System.out.println("Invalid Account Number! It must be 10 digits.");
+                            continue;
+                        }
+
+                        if(findAccount(accounts, count, accNo) != -1) {
+                            System.out.println("Account number already exists! Try another.");
+                            continue;
+                        }
+
+                        break;
+                    }
 
                     System.out.println("Enter Initial Balance:");
                     double balance = sc.nextDouble();
-                    
-                    Bank account = new Bank(name , accNo , balance);
-                    accounts[count]=account;
+
+                    Bank account = new Bank(name, accNo, balance);
+
+                    accounts[count] = account;
                     count++;
-                    
+
                     System.out.println("Account created successfully!");
                     break;
-            	}else {
-            		System.out.println("bank account limit is reached");
-            		break;
-            	}
-            	
+
+                } else {
+
+                    System.out.println("Bank account limit is reached");
+                    
+
+                }   break;         	
             case 2:
                 System.out.println("Enter the Account Number:");
-                int enteredAccountNo = sc.nextInt();
+                String enteredAccountNo = sc.nextLine();
                 
                 int index = findAccount(accounts , count , enteredAccountNo);
                 
                 if(index!=-1) {
                 
                 	System.out.println("Enter deposit amount:");
-                    double dep = sc.nextDouble();
-                    
-                    accounts[index].deposit(dep);
-                    
+                	double dep = sc.nextDouble();
+
+                	if(isValidDeposit(dep)) {
+                	    accounts[index].deposit(dep);
+                	    System.out.println("₹" + dep + " deposited successfully!");
+                	} else {
+                	    System.out.println("Invalid deposit amount!");
+                	}
+                   
                     break;
+                
                 } else {
                 	
                 	System.out.println("Account Not Found");
@@ -73,7 +104,7 @@ public class Main {
             case 3:
             	
             	System.out.println("Enter the Account Number:");
-                int enteredAccountNo2 = sc.nextInt();
+                String enteredAccountNo2 = sc.nextLine();
 
                 int index2 = findAccount(accounts, count, enteredAccountNo2);
 
@@ -82,7 +113,12 @@ public class Main {
                     System.out.println("Enter withdrawal amount:");
                     double wit = sc.nextDouble();
 
-                    accounts[index2].withdraw(wit);
+                    if(isValidWithdraw(wit, accounts[index2].getBalance())) {
+                        accounts[index2].withdraw(wit);
+                        System.out.println("Withdrawal successful!");
+                    } else {
+                        System.out.println("Invalid amount or insufficient balance!");
+                    }
 
                 } else {
 
@@ -94,7 +130,7 @@ public class Main {
 
             case 4:
             	System.out.println("Enter the Account Number:");
-                int enteredAccountNo3 = sc.nextInt();
+                String enteredAccountNo3 = sc.nextLine();
 
                 int index3 = findAccount(accounts, count, enteredAccountNo3);
 
@@ -114,7 +150,7 @@ public class Main {
 
 
                 System.out.println("Enter the Account Number:");
-                int enteredAccountNo4 = sc.nextInt();
+                String enteredAccountNo4 = sc.nextLine();
 
                 int index4 = findAccount(accounts, count, enteredAccountNo4);
 
@@ -146,14 +182,32 @@ public class Main {
 	
 	}
 	
-	public static int findAccount(Bank[] accounts, int count,int accNo) {
+	public static int findAccount(Bank[] accounts, int count,String accNo) {
 		
 		for(int i=0;i<count;i++) {
 			
-			if(accounts[i].getAccountNumber()==accNo) {
+			if(accounts[i].getAccountNumber().equals(accNo)) {
 				return i;
 			}
 		}
 		return -1;
 	}
+	
+	public static boolean isValidAccountNumber(String accNo) {
+	    return accNo.length() == 10;
+	}
+	
+	public static boolean isValidDeposit(double amount) {
+	    return amount > 0;
+	}
+	
+	public static boolean isValidWithdraw(double amount, double balance) {
+	    return amount > 0 && amount <= balance;
+	}
+	
+	public static boolean isValidChoice(int choice) {
+	    return choice >= 1 && choice <= 6;
+	}
+	
+	
 }
